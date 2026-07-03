@@ -1,12 +1,13 @@
 # Optional
 
 ## 목차
-- Optional
-- Ownership
-- Optional - 메모리 관점 (Extra Inhabitant Optimization)
-  - ABI
-- Optional Binding
-- Optional Chaining
+- [Optional](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#optional-1)
+- [Ownership](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#-swift6-ownership)
+- [Optional - 메모리 관점 (Extra Inhabitant Optimization)](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#옵셔널은-메모리를-얼마나-사용하지)
+  - [ABI](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#abi가-무엇일까-application-binary-interface)
+- [Optional Unwrapping 내부 동작 확인](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#optional-체크-방법-강제-언래핑은-위험하다)
+- [Optional Binding](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#1-optional-binding)
+- [Optional Chaining](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#2-optional-chaining)
 
 ## Optional
 : `‘값이 없다’`를 넘어서, 도메인에서 `’아직 정해지지 않음’`, `’존재하지 않음’`, `’적용되지 않음’`과 같은 상태를 표현하는 타입
@@ -69,6 +70,7 @@ where Wrapped : ~Copyable, Wrapped : ~Escapable
 > - **Bool 타입의 경우에도 크기가 같다.**
 >   - -> 이유: Bool은 0과 1 두 개만 쓰지만 1byte로 256가지를 표현할 수 있기 때문에 남는 비트 패턴을 nil로 활용
 > 이때 payload 안에 사용하지 않는 값 = **Extra Inhabitant** (사용할 수 없는 비트 패턴)
+> [테스트 코드](https://github.com/moonazn/dev-study-log/blob/main/Swift/Examples/OptionalUnwrapTest.swift)
 > #### 정리) 어떤 타입이 사용하지 않는 비트 패턴(extra inhabitant)을 가지고 있다면 Swift는 그 비트 패턴을 Optional의 .none과 같은 enum case를 표현하는 데 활용하여 별도의 tag 저장 공간을 줄이는 최적화를 시행한다.
 > > 모든 Optional이 최적화되는 것은 아니다. 어떤 차이가 생기는거지? -> ABI..
 
