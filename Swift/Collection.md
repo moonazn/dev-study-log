@@ -2,7 +2,7 @@
 
 ## 목차
 - [Collection](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#collection-1)
-- [Hash](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#1-hash))
+- [Hash](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#1-hash)
 - [Hashable](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#2-hashable)
 - [Equatable](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#3-equatable-프로토콜)
 - [inout](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#4-inout)
