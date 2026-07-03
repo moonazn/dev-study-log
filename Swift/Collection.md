@@ -1,26 +1,13 @@
-# 2026. 6. 19. 오후 4:43
-
-#공부재시작/basic/mission2
-
-> **git repo / gist 만들어서 공부 노트 올리기**
-> **(readme에 공부노트 목적 같이 쓰자**
-> **뭐 내용 순서는 내가 파고들며 공부하는 순서.. 궁금증이 생기는 순서.. 뭐 이런거**
-> 
-> **pdf로 넣고 바로 보이게 넣을 수 있나?**
-
 # Collection
 
 ## 목차
-- [Collection이란?](#collection이란)
-- [Array](#array)
-- [Set](#set)
-- [Dictionary](#dictionary)
-- [Hash](#hash)
-- [Hash Table](#hash-table)
-- [Hashable](#hashable)
-- [Equatable](#equatable)
-- [Hasher](#hasher)
-- [inout](#inout)
+- [Collection](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#collection-1)
+- [Hash](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#1-hash))
+- [Hashable](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#2-hashable)
+- [Equatable](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#3-equatable-프로토콜)
+- [inout](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#4-inout)
+- [stride](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#stride)
+- [allSatisfy](https://github.com/moonazn/dev-study-log/blob/main/Swift/Collection.md#allsatisfy)
 
 ### 학습 키워드
 - 2차원 배열
