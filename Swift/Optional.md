@@ -1,12 +1,13 @@
 # Optional
 
 ## 목차
-- Optional
-- Ownership
-- Optional - 메모리 관점 (Extra Inhabitant Optimization)
-  - ABI
-- Optional Binding
-- Optional Chaining
+- [Optional](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#optional-1)
+- [Ownership](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#-swift6-ownership)
+- [Optional - 메모리 관점 (Extra Inhabitant Optimization)](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#옵셔널은-메모리를-얼마나-사용하지)
+  - [ABI](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#abi가-무엇일까-application-binary-interface)
+- [Optional Unwrapping 내부 동작 확인](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#optional-체크-방법-강제-언래핑은-위험하다)
+- [Optional Binding](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#1-optional-binding)
+- [Optional Chaining](https://github.com/moonazn/dev-study-log/blob/main/Swift/Optional.md#2-optional-chaining)
 
 ## Optional
 : `‘값이 없다’`를 넘어서, 도메인에서 `’아직 정해지지 않음’`, `’존재하지 않음’`, `’적용되지 않음’`과 같은 상태를 표현하는 타입
@@ -69,6 +70,7 @@ where Wrapped : ~Copyable, Wrapped : ~Escapable
 > - **Bool 타입의 경우에도 크기가 같다.**
 >   - -> 이유: Bool은 0과 1 두 개만 쓰지만 1byte로 256가지를 표현할 수 있기 때문에 남는 비트 패턴을 nil로 활용
 > 이때 payload 안에 사용하지 않는 값 = **Extra Inhabitant** (사용할 수 없는 비트 패턴)
+> [테스트 코드](https://github.com/moonazn/dev-study-log/blob/main/Swift/Examples/OptionalUnwrapTest.swift)
 > #### 정리) 어떤 타입이 사용하지 않는 비트 패턴(extra inhabitant)을 가지고 있다면 Swift는 그 비트 패턴을 Optional의 .none과 같은 enum case를 표현하는 데 활용하여 별도의 tag 저장 공간을 줄이는 최적화를 시행한다.
 > > 모든 Optional이 최적화되는 것은 아니다. 어떤 차이가 생기는거지? -> ABI..
 
@@ -117,7 +119,9 @@ let y = optionalValue!
 ```
 
 SIL 확인 (`swiftc -emit-sil`로 컴파일하여 확인)
-![](Optional/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-03%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%208.42.32.png)
+
+<img width="941" height="323" alt="스크린샷 2026-07-03 오후 8 42 32" src="https://github.com/user-attachments/assets/77093056-a98f-4f55-9f41-1cb64a873632" />
+
 - 95: “`.some`이면 값을 꺼내는 bb4 블록으로 가고, `.none`이면 런타임 trap을 발생시키는 bb3 블록으로 가라”
 - 99: `cond_fail`은 Optional이 `.none`인 경우 런타임 trap을 발생시킨다.
 - 100: `unreachable`은 trap 이후 정상적인 실행 흐름이 존재하지 않음을 의미한다.
@@ -133,7 +137,9 @@ SIL 확인 (`swiftc -emit-sil`로 컴파일하여 확인)
 > `swiftc -emit-sil`으로 Swift 코드를 컴파일하며 최종 실행 파일을 만들지 않고 SIL 단계의 결과를 출력하여 확인하였다.
 
 Assembly 확인
-![](Optional/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-03%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%209.16.07.png)
+
+<img width="280" height="97" alt="스크린샷 2026-07-03 오후 9 16 07" src="https://github.com/user-attachments/assets/b2f59a99-b374-4cc7-9c5c-f531f07993bb" />
+
 1. 61: x8이 가리키는 메모리 위치(Optional의 payload 자리)에 1 넣기
    - xzr: ARM64에서 항상 0인 레지스터
 2. 62: x8 주소에서 8바이트 뒤 위치(Optional의 tag 자리)에 w21 값(= 1) 저장
