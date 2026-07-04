@@ -343,3 +343,6 @@ Assembly 확인
 ### 2) Optional Chaining
 옵셔널에 nil이 아닌 값이 포함된 경우에만 옵셔널 값의 속성에 액세스하거나 메서드를 호출할 수 있다.
 
+
+---
+> [Ownership 내용 학습 참고 블로그](https://velog.io/@tjrqja07/Swift-Ownership)
