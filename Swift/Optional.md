@@ -168,6 +168,11 @@ print("b:", b.values) // [1, 2, 3, 4]
 ```
 -> 내부 저장소는 필요한 순간에만 복사👍🏻
 
+> ### 모든 구조체가 Copy-on-Write를 사용하는 것은 X
+> - 모든 구조체가 value sematics를 제공한다.
+> - Copy-on-Write는 복사 비용이 큰 값 타입에서 선택적으로 사용하는 최적화 전략
+> - 따라서 ==🟡모든 구조체가 이 전략을 사용하는 것은 아니다.==
+
 #### Copyable: 복사 가능한 타입
 Swift에서 대부분의 타입(struct, enum, class 등)은 `Copyable`이다.
 
@@ -359,6 +364,3 @@ Assembly 확인
 ### 2) Optional Chaining
 옵셔널에 nil이 아닌 값이 포함된 경우에만 옵셔널 값의 속성에 액세스하거나 메서드를 호출할 수 있다.
 
-
----
-> [Ownership 내용 학습 참고 블로그](https://velog.io/@tjrqja07/Swift-Ownership)
